@@ -35,8 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
         while(running) {
             start = System.currentTimeMillis();
             skippedFrames = 0;
-
-
+            
             repaint();
 
             diff = System.currentTimeMillis() - start;
