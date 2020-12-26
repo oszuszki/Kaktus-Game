@@ -1,12 +1,18 @@
 package com.game.panels;
 
+import com.game.entities.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Random;
 
-public class GamePanel extends JPanel implements Runnable{
+public class GamePanel extends JPanel implements Runnable, KeyListener {
+
+    private Player player;
 
     private Thread thread;
     boolean running = false;
@@ -16,6 +22,8 @@ public class GamePanel extends JPanel implements Runnable{
     int MAX_FRAME_SKIPS = 5;
 
     public GamePanel()  {
+        addKeyListener(this);
+        setFocusable(true);
 
         start();
     }
@@ -35,12 +43,12 @@ public class GamePanel extends JPanel implements Runnable{
         while(running) {
             start = System.currentTimeMillis();
             skippedFrames = 0;
-            
+
             repaint();
+            Player.move();
 
             diff = System.currentTimeMillis() - start;
             sleep = targetTime - diff;
-            System.out.println(sleep);
 
             if (sleep > 0) {
                 try {
@@ -60,11 +68,23 @@ public class GamePanel extends JPanel implements Runnable{
     public void paint(Graphics g) {
         super.paintComponent(g);
 
-        Random rand = new Random();
-        int r = rand.nextInt(2);
-        if (r == 1)
-            setBackground(Color.CYAN);
-        else
-            setBackground(Color.red);
+        setBackground(Color.black);
+
+        Player.draw(g);
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        Player.keyPressed(e.getKeyCode());
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        Player.keyReleased(e.getKeyCode());
     }
 }
