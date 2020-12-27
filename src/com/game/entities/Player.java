@@ -5,9 +5,9 @@ import java.awt.event.KeyEvent;
 
 public class Player {
 
-    private static int x = 10;
-    private static int y = 10;
-    private static int height = 50 , width = 50;
+    private static int x = 5;
+    private static int y = 5;
+    private static int height = 64 , width = 64;
     private static boolean right = false;
     private static boolean left = false;
     private static boolean jump = false;
@@ -15,16 +15,18 @@ public class Player {
 
     public static void move() {
         if(right == true) {
-            x = x + 10;
+            x = x + 8;
+            System.out.println(x);
+            System.out.println(y);
         }
         if(jump == true) {
-            y = y - 10;
+            y = y - 8;
         }
         if(left == true) {
-            x = x - 10;
+            x = x - 8;
         }
         if(fall == true) {
-            y = y + 10;
+            y = y + 8;
         }
     }
 

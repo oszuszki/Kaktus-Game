@@ -36,6 +36,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     }
 
+    public void update() {
+        repaint();
+        Player.move();
+    }
+
     @Override
     public void run() {
         long start, diff, sleep, skippedFrames;
@@ -44,8 +49,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             start = System.currentTimeMillis();
             skippedFrames = 0;
 
-            repaint();
-            Player.move();
+            update();
 
             diff = System.currentTimeMillis() - start;
             sleep = targetTime - diff;
