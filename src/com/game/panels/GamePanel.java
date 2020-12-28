@@ -1,5 +1,6 @@
 package com.game.panels;
 
+import com.game.appearance.Map;
 import com.game.entities.Player;
 
 import javax.swing.*;
@@ -21,6 +22,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     private long targetTime = 1000/FPS;
     int MAX_FRAME_SKIPS = 5;
 
+    int mapcounter = 0;
+
     public GamePanel()  {
         addKeyListener(this);
         setFocusable(true);
@@ -38,7 +41,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     public void update() {
         repaint();
+
         Player.move();
+
     }
 
     @Override
@@ -50,6 +55,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             skippedFrames = 0;
 
             update();
+
+            if (mapcounter == 0){
+                Map.loadMap();
+                mapcounter++;
+            }
 
             diff = System.currentTimeMillis() - start;
             sleep = targetTime - diff;

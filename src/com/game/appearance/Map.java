@@ -11,14 +11,20 @@ public class Map {
     private String line;
     private int width, height;
 
+
+
     public void Map(String mapPath) {
         path = mapPath;
     }
 
-    public void LoadMap() {
-        InputStream is = this.getClass().getResourceAsStream(path);
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-
+    public static void loadMap() {
+        for( int i = 0; i < MapBuilding.map1.length; i++ )
+        {
+            for( int j = 0; j < MapBuilding.map1[i].length; j++ )
+            {
+                System.out.println(MapBuilding.map1[i][j]);
+            }
+        }
     }
 
 }

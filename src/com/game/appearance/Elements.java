@@ -1,4 +1,7 @@
 package com.game.appearance;
 
-public class Elements {
+import java.awt.*;
+
+public class Elements extends Rectangle {
+
 }
