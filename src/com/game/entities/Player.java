@@ -16,8 +16,8 @@ public class Player {
     public static void move() {
         if(right == true) {
             x = x + 8;
-            System.out.println(x);
-            System.out.println(y);
+            //System.out.println(x);
+            //System.out.println(y);
         }
         if(jump == true) {
             y = y - 8;

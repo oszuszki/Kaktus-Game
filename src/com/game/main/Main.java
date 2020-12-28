@@ -10,9 +10,7 @@ public class Main {
     public static void main(String [] args) {
         GraphicsEnvironment graphics =
                 GraphicsEnvironment.getLocalGraphicsEnvironment();
-        System.out.println(graphics);
         GraphicsDevice device = graphics.getDefaultScreenDevice();
-        System.out.println(device);
 
         JFrame frame = new JFrame("Demo");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
