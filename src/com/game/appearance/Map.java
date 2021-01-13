@@ -1,30 +1,40 @@
 package com.game.appearance;
 
-import java.io.BufferedReader;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+
+import com.game.appearance.Images;
+import com.game.panels.GamePanel;
+
+import javax.imageio.ImageIO;
 
 public class Map {
 
-    private String path;
-    private String line;
-    private int width, height;
+    public static int blockSize= 32;
 
 
+    public static void draw(Graphics g) {
 
-    public void Map(String mapPath) {
-        path = mapPath;
-    }
-
-    public static void loadMap() {
-        for( int i = 0; i < MapBuilding.map1.length; i++ )
-        {
-            for( int j = 0; j < MapBuilding.map1[i].length; j++ )
-            {
-                System.out.println(MapBuilding.map1[i][j]);
+        for (int i = 0; i < MapBuilding.map1.length; i++) {
+            for (int j = 0; j < MapBuilding.map1[i].length; j++) {
+                if (MapBuilding.map1[i][j] == 0){
+                    g.setColor(Color.blue);
+                    g.drawRect(i * blockSize,j * blockSize , blockSize, blockSize);
+                }
+                else if (MapBuilding.map1[i][j] == 1){
+                    g.setColor(Color.red);
+                    g.drawRect(i * blockSize,j * blockSize , blockSize, blockSize);
+                    //g.drawImage(image, 0,0, blockSize, blockSize, null);
+                    g.drawImage(GamePanel.images[0], i * blockSize,j * blockSize, blockSize, blockSize, null);
+                    //if(image == null)
+                       // System.out.println("NULL");
+                }
             }
         }
     }
-
 }

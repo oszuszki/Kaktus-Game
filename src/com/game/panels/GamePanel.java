@@ -3,17 +3,21 @@ package com.game.panels;
 import com.game.appearance.Map;
 import com.game.entities.Player;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Random;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     private Player player;
+    private Map map;
 
     private Thread thread;
     boolean running = false;
@@ -22,11 +26,19 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     private long targetTime = 1000/FPS;
     int MAX_FRAME_SKIPS = 5;
 
-    int mapcounter = 0;
+    public static BufferedImage[] images;
 
     public GamePanel()  {
         addKeyListener(this);
         setFocusable(true);
+
+        images = new BufferedImage[1];
+
+        try {
+            images[0] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/redx.png"));
+        } catch (IOException var2) {
+            var2.printStackTrace();
+        }
 
         start();
     }
@@ -56,11 +68,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
             update();
 
-            if (mapcounter == 0){
-                Map.loadMap();
-                mapcounter++;
-            }
-
             diff = System.currentTimeMillis() - start;
             sleep = targetTime - diff;
 
@@ -82,9 +89,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     public void paint(Graphics g) {
         super.paintComponent(g);
 
-        setBackground(Color.black);
-
+        Map.draw(g);
         Player.draw(g);
+        setBackground(Color.black);
     }
 
     @Override
