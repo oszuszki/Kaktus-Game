@@ -13,6 +13,8 @@ import com.game.panels.GamePanel;
 
 import javax.imageio.ImageIO;
 
+import static com.game.appearance.MapBuilding.map1;
+
 public class Map {
 
     public static int blockSize= 32;
@@ -20,17 +22,22 @@ public class Map {
     public static int bg_x = -100;
     public static int bg_y = -70;
 
+
+
+
+
     public static void platform(Graphics g) {
-        for (int i = 0; i < MapBuilding.map1.length; i++) {
-            for (int j = 0; j < MapBuilding.map1[i].length; j++) {
-                if (MapBuilding.map1[i][j] == 0){
-                    //g.setColor(Color.blue);
-                    //g.drawRect(i * blockSize,j * blockSize , blockSize, blockSize);
+
+        for (int i = 0; i < map1.length; i++) {
+            for (int j = 0; j < map1[i].length; j++) {
+                if (map1[i][j] == 0){
+                    g.setColor(Color.blue);
+                    g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
                 }
-                else if (MapBuilding.map1[i][j] == 1){
+                else if (map1[i][j] == 1){
                     g.setColor(Color.red);
-                    g.drawRect(i * blockSize,j * blockSize , blockSize, blockSize);
-                    g.drawImage(GamePanel.images[0], i * blockSize,j * blockSize, blockSize, blockSize, null);
+                    g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
+                    g.drawImage(GamePanel.images[0], j * blockSize,i * blockSize, blockSize, blockSize, null);
 
                 }
             }

@@ -14,10 +14,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
+
+
 public class GamePanel extends JPanel implements Runnable, KeyListener {
 
-    private Player player;
-    private Map map;
+    private boolean settingUpMap = true;
 
     private Thread thread;
     boolean running = false;
@@ -58,6 +59,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
         Player.move();
 
+
+
     }
 
     @Override
@@ -90,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     public void paint(Graphics g) {
         super.paintComponent(g);
+
 
         Map.draw(g);
         Player.draw(g);
