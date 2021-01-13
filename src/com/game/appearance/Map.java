@@ -17,24 +17,32 @@ public class Map {
 
     public static int blockSize= 32;
 
+    public static int bg_x = -40;
+    public static int bg_y = -0;
 
-    public static void draw(Graphics g) {
-
+    public static void platform(Graphics g) {
         for (int i = 0; i < MapBuilding.map1.length; i++) {
             for (int j = 0; j < MapBuilding.map1[i].length; j++) {
                 if (MapBuilding.map1[i][j] == 0){
-                    g.setColor(Color.blue);
-                    g.drawRect(i * blockSize,j * blockSize , blockSize, blockSize);
+                    //g.setColor(Color.blue);
+                    //g.drawRect(i * blockSize,j * blockSize , blockSize, blockSize);
                 }
                 else if (MapBuilding.map1[i][j] == 1){
                     g.setColor(Color.red);
                     g.drawRect(i * blockSize,j * blockSize , blockSize, blockSize);
-                    //g.drawImage(image, 0,0, blockSize, blockSize, null);
                     g.drawImage(GamePanel.images[0], i * blockSize,j * blockSize, blockSize, blockSize, null);
-                    //if(image == null)
-                       // System.out.println("NULL");
+
                 }
             }
         }
+    }
+
+    public static void backGround(Graphics g){
+        g.drawImage(GamePanel.images[1], bg_x,bg_y, 2000, 864, null);
+    }
+
+    public static void draw(Graphics g) {
+        backGround(g);
+        platform(g);
     }
 }

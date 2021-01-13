@@ -32,10 +32,12 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         addKeyListener(this);
         setFocusable(true);
 
-        images = new BufferedImage[1];
+        //temporary
+        images = new BufferedImage[2];
 
         try {
             images[0] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/redx.png"));
+            images[1] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/bg.jpg"));
         } catch (IOException var2) {
             var2.printStackTrace();
         }

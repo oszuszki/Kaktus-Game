@@ -1,5 +1,7 @@
 package com.game.entities;
 
+import com.game.appearance.Map;
+
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
@@ -23,18 +25,21 @@ public class Player {
 
     public static void move() {
         if(right == true) {
-            x = x + 8;
+            x += 8;
             //System.out.println(x);
             //System.out.println(y);
-        }
-        if(jump == true) {
-            y = y - 8;
+            Map.bg_x -= 1;
         }
         if(left == true) {
-            x = x - 8;
+            x -= 8;
+            Map.bg_x += 1;
         }
+        if(jump == true) {
+            y -= 8;
+        }
+
         if(fall == true) {
-            y = y + 8;
+            y += 8;
         }
     }
 
