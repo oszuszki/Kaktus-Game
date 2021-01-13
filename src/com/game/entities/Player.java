@@ -11,37 +11,68 @@ public class Player {
 
     private static int x = 100;
     private static int y = 100;
-    private static int height = 64;
-    private static int width = 64;
+    private static final int height = 64;
+    private static final int width = 64;
     private static boolean right = false;
     private static boolean left = false;
     private static boolean up = false;
     private static boolean down = false;
 
+    private static final double jumpSpeed = 5;
+    private static double currentJumpSpeed = jumpSpeed;
+    private static final boolean topCollision = false;
+    private static final double maxFallSpeed = 5;
+    private static double currentFallSpeed = 0.5;
+
     public static void move() {
 
-        if(up == false && MapBuilding.map1[((y + 64) / 32)][((x) / 32)] != 1 && MapBuilding.map1[((y + 64) / 32)][((x) / 32) + 1] != 1
-                && MapBuilding.map1[((y + 64) / 32)][((x) / 32) + 2] != 1) {
-            y += 6;
-            Map.bg_y -= 1;
+        if(MapBuilding.map1[((y) / 32)][((x + 68) / 32)] == 1 || MapBuilding.map1[((y) / 32) + 1][((x + 68) / 32)] == 1) {
+            right = false;
+        }
+        if(MapBuilding.map1[((y) / 32)][((x - 8) / 32)] == 1 || MapBuilding.map1[((y) / 32 + 1)][((x - 4) / 32)] == 1) {
+            left = false;
+        }
+        if(MapBuilding.map1[((y - 8) / 32)][(x / 32)] == 1 || MapBuilding.map1[((y - 8) / 32)][(x / 32) + 1] == 1) {
+            up = false;
             down = true;
         }
+        if(MapBuilding.map1[((y + 64) / 32)][((x) / 32)] == 1 || MapBuilding.map1[((y + 64) / 32)][((x) / 32) + 1] == 1
+                || MapBuilding.map1[((y + 64) / 32)][((x) / 32) + 2] == 1) {
+            down = false;
+        }  else {
+            if (!topCollision && !up) {
+                down = true;
+            }
+        }
 
-        if(right == true && MapBuilding.map1[((y) / 32)][((x + 68) / 32)] != 1 && MapBuilding.map1[((y) / 32) + 1][((x + 68) / 32)] != 1) {
+        if(right){
             x += 6;
+        }
+
+        if(left){
+            x -= 6;
             //System.out.println(x);
             //System.out.println(y);
-            Map.bg_x -= 1;
         }
-        if(left == true && MapBuilding.map1[((y) / 32)][((x - 8) / 32)] != 1 && MapBuilding.map1[((y) / 32 + 1)][((x - 4) / 32)] != 1) {
-            x -= 6;
-            Map.bg_x += 1;
+
+        if (up) {
+            y -= currentJumpSpeed;
+            currentJumpSpeed -= .1;
+            if (currentJumpSpeed <= 0) {
+                currentJumpSpeed = jumpSpeed;
+                up = false;
+                down = true;
+            }
         }
-        if(up == true && MapBuilding.map1[((y - 8) / 32)][(x / 32)] != 1 && MapBuilding.map1[((y - 8) / 32)][(x / 32) + 1] != 1
-                && MapBuilding.map1[((y - 8) / 32)][(x / 32) + 2] != 1) {
-            y -= 50;
-            Map.bg_y += 6;
-            up = false;
+
+        if (down) {
+            y += currentFallSpeed;
+            if (currentFallSpeed < maxFallSpeed) {
+                currentFallSpeed += .5;
+            }
+        }
+        if (!down) {
+            currentFallSpeed = .1;
         }
 
     }
@@ -61,19 +92,15 @@ public class Player {
             down = true;
         if (k == KeyEvent.VK_A)
             left = true;
-        if (k == KeyEvent.VK_W){
+        if (k == KeyEvent.VK_W && !up && !down){
             up = true;
-            down = false;
         }
     }
     public static void keyReleased(int k) {
         if (k == KeyEvent.VK_D)
             right = false;
-        if (k == KeyEvent.VK_S)
-            down = false;
         if (k == KeyEvent.VK_A)
             left = false;
-        if (k == KeyEvent.VK_W)
-            up = false;
+
     }
     }
