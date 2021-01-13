@@ -17,8 +17,8 @@ public class Map {
 
     public static int blockSize= 32;
 
-    public static int bg_x = -40;
-    public static int bg_y = -0;
+    public static int bg_x = -100;
+    public static int bg_y = -70;
 
     public static void platform(Graphics g) {
         for (int i = 0; i < MapBuilding.map1.length; i++) {
@@ -38,7 +38,7 @@ public class Map {
     }
 
     public static void backGround(Graphics g){
-        g.drawImage(GamePanel.images[1], bg_x,bg_y, 2000, 864, null);
+        g.drawImage(GamePanel.images[1], bg_x,bg_y, 2000, 1000, null);
     }
 
     public static void draw(Graphics g) {

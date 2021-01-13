@@ -36,10 +36,12 @@ public class Player {
         }
         if(jump == true) {
             y -= 8;
+            Map.bg_y += 1;
         }
 
         if(fall == true) {
             y += 8;
+            Map.bg_y -= 1;
         }
     }
 
