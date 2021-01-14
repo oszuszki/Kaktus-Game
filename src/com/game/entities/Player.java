@@ -24,25 +24,37 @@ public class Player {
     private static final double maxFallSpeed = 8;
     private static double currentFallSpeed = 0.3;
 
+    public static boolean nextLvl = false;
+    public static int lvlCounter = 1;
+
+    public static void collision() {
+        if(MapBuilding.map[((y) / 32)][((x + 68) / 32)] == 2 || MapBuilding.map[((y) / 32) + 1][((x + 68) / 32)] == 2
+                || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 68) / 32)] == 2)) {
+            lvlCounter += 1;
+        }
+    }
+
     public static void move() {
 
-        if(MapBuilding.map1[((y) / 32)][((x + 68) / 32)] == 1 || MapBuilding.map1[((y) / 32) + 1][((x + 68) / 32)] == 1
-                || ((y % 32) > 5 && MapBuilding.map1[((y) / 32) + 2][((x + 68) / 32)] == 1)) {
+        collision();
+
+        if(MapBuilding.map[((y) / 32)][((x + 68) / 32)] == 1 || MapBuilding.map[((y) / 32) + 1][((x + 68) / 32)] == 1
+                || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 68) / 32)] == 1)) {
             right = false;
 
         }
-        if(MapBuilding.map1[((y) / 32)][((x - 5) / 32)] == 1 || MapBuilding.map1[((y) / 32 + 1)][((x - 5) / 32)] == 1
-                || ((y % 32) > 5 && MapBuilding.map1[((y) / 32 + 2)][((x - 4) / 32)] == 1)) {
+        if(MapBuilding.map[((y) / 32)][((x - 5) / 32)] == 1 || MapBuilding.map[((y) / 32 + 1)][((x - 5) / 32)] == 1
+                || ((y % 32) > 5 && MapBuilding.map[((y) / 32 + 2)][((x - 4) / 32)] == 1)) {
             left = false;
         }
-        if(MapBuilding.map1[((y - 4) / 32)][(x / 32)] == 1 || MapBuilding.map1[((y - 4) / 32)][(x / 32) + 1] == 1
-                || ((x % 32) > 5 && MapBuilding.map1[((y - 4) / 32)][(x / 32) + 2] == 1)) {
+        if(MapBuilding.map[((y - 4) / 32)][(x / 32)] == 1 || MapBuilding.map[((y - 4) / 32)][(x / 32) + 1] == 1
+                || ((x % 32) > 5 && MapBuilding.map[((y - 4) / 32)][(x / 32) + 2] == 1)) {
             up = false;
             currentJumpSpeed = jumpSpeed;
             down = true;
         }
-        if(MapBuilding.map1[((y + 68) / 32)][((x) / 32)] == 1 || MapBuilding.map1[((y + 68) / 32)][((x) / 32) + 1] == 1
-                || ((x % 32) > 5 && MapBuilding.map1[((y + 68) / 32)][((x) / 32) + 2] == 1)) {
+        if(MapBuilding.map[((y + 68) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 68) / 32)][((x) / 32) + 1] == 1
+                || ((x % 32) > 5 && MapBuilding.map[((y + 68) / 32)][((x) / 32) + 2] == 1)) {
             down = false;
         }  else {
             if (!topCollision && !up) {
@@ -52,14 +64,10 @@ public class Player {
 
         if(right){
             x += 6;
-            System.out.println(y / 32);
-            System.out.println(y % 32);
         }
 
         if(left){
             x -= 6;
-            System.out.println(y / 32);
-            System.out.println(y % 32);
         }
 
         if (up) {
@@ -85,6 +93,7 @@ public class Player {
     }
 
     public static void draw(Graphics g) {
+
         g.setColor(Color.red);
         g.drawRect(x, y, width, height);
 
