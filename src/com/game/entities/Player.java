@@ -2,6 +2,8 @@ package com.game.entities;
 
 import com.game.appearance.Map;
 import com.game.appearance.MapBuilding;
+import static com.game.appearance.MapBuilding.y;
+import static com.game.appearance.MapBuilding.x;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -9,8 +11,6 @@ import java.awt.event.KeyEvent;
 
 public class Player {
 
-    private static int x = 60;
-    private static int y = 400;
     private static final int height = 64;
     private static final int width = 64;
     private static boolean right = false;
@@ -26,11 +26,13 @@ public class Player {
 
     public static boolean nextLvl = false;
     public static int lvlCounter = 1;
+    public static boolean newLvl = true;
 
     public static void collision() {
         if(MapBuilding.map[((y) / 32)][((x + 68) / 32)] == 2 || MapBuilding.map[((y) / 32) + 1][((x + 68) / 32)] == 2
                 || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 68) / 32)] == 2)) {
             lvlCounter += 1;
+            newLvl = true;
         }
     }
 
