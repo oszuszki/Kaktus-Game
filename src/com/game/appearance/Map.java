@@ -49,7 +49,7 @@ public class Map {
     }
 
     public static void draw(Graphics g) {
-        backGround(g);
+        //backGround(g);
         platform(g);
     }
 }
