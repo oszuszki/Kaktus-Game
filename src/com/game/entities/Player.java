@@ -20,7 +20,7 @@ public class Player {
 
     private static final double jumpSpeed = 8;
     private static double currentJumpSpeed = jumpSpeed;
-    private static final boolean topCollision = false;
+    private static boolean topCollision = false;
     private static final double maxFallSpeed = 8;
     private static double currentFallSpeed = 0.3;
 
@@ -59,10 +59,11 @@ public class Player {
                 || ((x % 32) > 5 && MapBuilding.map[((y + 68) / 32)][((x) / 32) + 2] == 1)) {
             down = false;
         }  else {
-            if (!topCollision && !up) {
+            if (!up) {
                 down = true;
             }
         }
+
 
         if(right){
             x += 6;
