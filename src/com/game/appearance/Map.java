@@ -1,21 +1,10 @@
 package com.game.appearance;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.ImageObserver;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 
-import com.game.appearance.Images;
 import com.game.panels.GamePanel;
 
-import javax.imageio.ImageIO;
-
 import static com.game.appearance.MapBuilding.*;
-import static com.game.entities.Player.lvlCounter;
-import static com.game.entities.Player.nextLvl;
 
 public class Map {
 
@@ -30,13 +19,14 @@ public class Map {
 
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
-                if (map[i][j] == 0){
-                    g.setColor(Color.blue);
-                    g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
+                if (map[i][j] == 2){
+                    g.drawImage(GamePanel.images[18], j * blockSize,i * blockSize, blockSize, blockSize, null);
+                    //g.setColor(Color.blue);
+                    //g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
                 }
                 else if (map[i][j] == 1){
-                    g.setColor(Color.red);
-                    g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
+                    //g.setColor(Color.blue);
+                    //g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
                     g.drawImage(GamePanel.images[0], j * blockSize,i * blockSize, blockSize, blockSize, null);
 
                 }

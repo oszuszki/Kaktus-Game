@@ -1,7 +1,8 @@
 package com.game.entities;
 
-import com.game.appearance.Map;
 import com.game.appearance.MapBuilding;
+import com.game.panels.GamePanel;
+
 import static com.game.appearance.MapBuilding.y;
 import static com.game.appearance.MapBuilding.x;
 
@@ -20,17 +21,20 @@ public class Player {
 
     private static final double jumpSpeed = 8;
     private static double currentJumpSpeed = jumpSpeed;
-    private static boolean topCollision = false;
     private static final double maxFallSpeed = 8;
     private static double currentFallSpeed = 0.3;
 
-    public static boolean nextLvl = false;
     public static int lvlCounter = 1;
     public static boolean newLvl = true;
 
+    private static int left_animation;
+    private static int right_animation;
+    private static int lFramecounter;
+    private static int rFramecounter;
+
     public static void collision() {
-        if(MapBuilding.map[((y) / 32)][((x + 68) / 32)] == 2 || MapBuilding.map[((y) / 32) + 1][((x + 68) / 32)] == 2
-                || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 68) / 32)] == 2)) {
+        if(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 2 || MapBuilding.map[((y) / 32) + 1][((x + 64) / 32)] == 2
+                || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 64) / 32)] == 2)) {
             lvlCounter += 1;
             newLvl = true;
         }
@@ -40,8 +44,8 @@ public class Player {
 
         collision();
 
-        if(MapBuilding.map[((y) / 32)][((x + 68) / 32)] == 1 || MapBuilding.map[((y) / 32) + 1][((x + 68) / 32)] == 1
-                || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 68) / 32)] == 1)) {
+        if(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 1 || MapBuilding.map[((y) / 32) + 1][((x + 64) / 32)] == 1
+                || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 64) / 32)] == 1)) {
             right = false;
 
         }
@@ -55,8 +59,8 @@ public class Player {
             currentJumpSpeed = jumpSpeed;
             down = true;
         }
-        if(MapBuilding.map[((y + 68) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 68) / 32)][((x) / 32) + 1] == 1
-                || ((x % 32) > 5 && MapBuilding.map[((y + 68) / 32)][((x) / 32) + 2] == 1)) {
+        if(MapBuilding.map[((y + 66) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 66) / 32)][((x) / 32) + 1] == 1
+                || ((x % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x) / 32) + 2] == 1)) {
             down = false;
         }  else {
             if (!up) {
@@ -95,10 +99,109 @@ public class Player {
 
     }
 
+    public static void animation (Graphics g) {
+
+        g.setColor(Color.blue);
+        g.drawRect(x,y ,64, 64);
+
+        if (!right && !left){
+            if (left_animation > right_animation)
+                g.drawImage(GamePanel.images[9],  x, y , null);
+            else
+                g.drawImage(GamePanel.images[9],  x, y , null);
+        }
+
+
+        if (left) {
+            right_animation = 0;
+            switch (lFramecounter) {
+                case 0, 2, 4, 6, 8, 10 -> {
+                    g.drawImage(GamePanel.images[10], x, y, null);
+                    lFramecounter = lFramecounter + 2;
+                }
+                case 12, 14, 16, 18, 20 -> {
+                    g.drawImage(GamePanel.images[11], x, y, null);
+                    lFramecounter = lFramecounter + 2;
+                }
+                case 22, 24, 26, 28, 30 -> {
+                    g.drawImage(GamePanel.images[12], x, y, null);
+                    lFramecounter = lFramecounter + 2;
+                }
+                case 32, 34, 36, 38, 40 -> {
+                    g.drawImage(GamePanel.images[13], x, y, null);
+                    lFramecounter = lFramecounter + 2;
+                }
+                case 42, 44, 46, 48, 50 -> {
+                    g.drawImage(GamePanel.images[14], x, y, null);
+                    lFramecounter = lFramecounter + 2;
+                }
+                case 52, 54, 56, 58, 60 -> {
+                    g.drawImage(GamePanel.images[15], x, y, null);
+                    lFramecounter = lFramecounter + 2;
+                }
+                case 62, 64, 66, 68, 70 -> {
+                    g.drawImage(GamePanel.images[16], x, y, null);
+                    lFramecounter = lFramecounter + 2;
+                }
+                case 72, 74, 76, 78 -> {
+                    g.drawImage(GamePanel.images[17], x, y, null);
+                    lFramecounter = lFramecounter + 2;
+                }
+                case 80 -> {
+                    g.drawImage(GamePanel.images[17], x, y, null);
+                    lFramecounter = 0;
+                }
+            }
+        }
+
+        if (right) {
+            left_animation = 0;
+            switch (rFramecounter) {
+                case 0, 2, 4, 6, 8, 10 -> {
+                    g.drawImage(GamePanel.images[1], x, y, null);
+                    rFramecounter = rFramecounter + 2;
+                }
+                case 12, 14, 16, 18, 20 -> {
+                    g.drawImage(GamePanel.images[2], x, y, null);
+                    rFramecounter = rFramecounter + 2;
+                }
+                case 22, 24, 26, 28, 30 -> {
+                    g.drawImage(GamePanel.images[3], x, y, null);
+                    rFramecounter = rFramecounter + 2;
+                }
+                case 32, 34, 36, 38, 40 -> {
+                    g.drawImage(GamePanel.images[4], x, y, null);
+                    rFramecounter = rFramecounter + 2;
+                }
+                case 42, 44, 46, 48, 50 -> {
+                    g.drawImage(GamePanel.images[5], x, y, null);
+                    rFramecounter = rFramecounter + 2;
+                }
+                case 52, 54, 56, 58, 60 -> {
+                    g.drawImage(GamePanel.images[6], x, y, null);
+                    rFramecounter = rFramecounter + 2;
+                }
+                case 62, 64, 66, 68, 70 -> {
+                    g.drawImage(GamePanel.images[7], x, y, null);
+                    rFramecounter = rFramecounter + 2;
+                }
+                case 72, 74, 76, 78 -> {
+                    g.drawImage(GamePanel.images[8], x, y, null);
+                    rFramecounter = rFramecounter + 2;
+                }
+                case 80 -> {
+                    g.drawImage(GamePanel.images[8], x, y, null);
+                    rFramecounter = 0;
+                }
+            }
+        }
+    }
+
     public static void draw(Graphics g) {
 
-        g.setColor(Color.red);
-        g.drawRect(x, y, width, height);
+        animation(g);
+        //g.setColor(Color.red);
+        //g.drawRect(x, y, width, height);
 
     }
 
