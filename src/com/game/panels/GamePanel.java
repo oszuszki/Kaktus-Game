@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         setFocusable(true);
 
         //temporary
-        images = new BufferedImage[23];
+        images = new BufferedImage[20];
 
         try {
             images[0] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/redx.png"));
@@ -46,7 +46,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             images[6] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/r6.png"));
             images[7] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/r7.png"));
             images[8] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/r8.png"));
-            images[9] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/kaktus.png"));
+            images[9] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/kaktus_l.png"));
             images[10] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l1.png"));
             images[11] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l2.png"));
             images[12] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l3.png"));
@@ -56,6 +56,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             images[16] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l7.png"));
             images[17] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l8.png"));
             images[18] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/calib.png"));
+            images[19] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/kaktus_r.png"));
         } catch (IOException var2) {
             var2.printStackTrace();
         }
