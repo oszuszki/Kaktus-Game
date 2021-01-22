@@ -40,8 +40,15 @@ public class Player {
             lvlCounter += 1;
             newLvl = true;
         }
-        if(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 3 || MapBuilding.map[((y + 34) / 32)][((x + 64) / 32)] == 3
-        || MapBuilding.map[((y) / 32)][((x - 6) / 32)] == 3 || MapBuilding.map[((y + 34) / 32)][((x - 6) / 32)] == 3) {
+        if(MapBuilding.map[((y) / 32)][((x + 60) / 32)] == 3 || MapBuilding.map[((y + 30) / 32)][((x + 60) / 32)] == 3
+                || MapBuilding.map[((y) / 32)][((x) / 32)] == 3 || MapBuilding.map[((y + 30) / 32)][((x) / 32)] == 3
+                || MapBuilding.map[((y + 60) / 32)][((x) / 32)] == 3 || MapBuilding.map[((y + 60) / 32)][((x + 30) / 32)] == 3
+                ||MapBuilding.map[((y) / 32)][((x + 60) / 32)] == 33 || MapBuilding.map[((y + 30) / 32)][((x + 60) / 32)] == 33
+                || MapBuilding.map[((y) / 32)][((x - 1) / 32)] == 33 || MapBuilding.map[((y + 30) / 32)][((x - 1) / 32)] == 33
+                || MapBuilding.map[((y + 60) / 32)][((x) / 32)] == 33 || MapBuilding.map[((y + 60) / 32)][((x + 30) / 32)] == 33
+                || MapBuilding.map[((y) / 32)][((x + 60) / 32)] == 4 || MapBuilding.map[((y + 30) / 32)][((x + 60) / 32)] == 4
+                || MapBuilding.map[((y) / 32)][((x - 1) / 32)] == 4 || MapBuilding.map[((y + 30) / 32)][((x - 1) / 32)] == 4
+                || MapBuilding.map[((y + 60) / 32)][((x) / 32)] == 4 || MapBuilding.map[((y + 60) / 32)][((x + 30) / 32)] == 4) {
             newLvl = true;
         }
     }
