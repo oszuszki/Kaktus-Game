@@ -33,6 +33,9 @@ public class Map {
                     case 33:
                         g.drawImage(GamePanel.images[21], arrowX2 * blockSize,arrowY2 * blockSize, blockSize, blockSize, null);
                         break;
+                    case 4:
+                        g.drawImage(GamePanel.images[22], j * blockSize,i * blockSize, blockSize, blockSize, null);
+                        break;
                 }
             }
         }
