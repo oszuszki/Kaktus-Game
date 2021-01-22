@@ -19,16 +19,18 @@ public class Map {
 
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
-                if (map[i][j] == 2){
-                    g.drawImage(GamePanel.images[18], j * blockSize,i * blockSize, blockSize, blockSize, null);
-                    //g.setColor(Color.blue);
-                    //g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
-                }
-                else if (map[i][j] == 1){
-                    //g.setColor(Color.blue);
-                    //g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
-                    g.drawImage(GamePanel.images[0], j * blockSize,i * blockSize, blockSize, blockSize, null);
-
+                switch (map[i][j]) {
+                    case 0:
+                        g.setColor(Color.blue);
+                        g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
+                        break;
+                    case 1:
+                        g.setColor(Color.red);
+                        g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
+                        break;
+                    case 2:
+                        g.drawImage(GamePanel.images[18], j * blockSize,i * blockSize, blockSize, blockSize, null);
+                        break;
                 }
             }
         }
