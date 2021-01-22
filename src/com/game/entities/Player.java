@@ -18,10 +18,13 @@ public class Player {
     private static boolean down = false;
     private static boolean canJump = false;
 
+    private static boolean dStillPressed = false;
+    private static boolean aStillPressed = false;
+
     private static final double jumpSpeed = 8;
     private static double currentJumpSpeed = jumpSpeed;
     private static final double maxFallSpeed = 8;
-    private static double currentFallSpeed = 0.3;
+    private static double currentFallSpeed = .3;
 
     public static int lvlCounter = 1;
     public static boolean newLvl = true;
@@ -37,6 +40,7 @@ public class Player {
             lvlCounter += 1;
             newLvl = true;
         }
+
     }
 
     public static void move() {
@@ -47,29 +51,38 @@ public class Player {
                 || ((x % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x) / 32) + 2] == 1)
         || MapBuilding.map[((y + 130) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 130) / 32)][((x) / 32) + 1] == 1)
             canJump = true;
-        if(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 1 || MapBuilding.map[((y) / 32) + 1][((x + 64) / 32)] == 1
-                || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 64) / 32)] == 1)) {
+        if(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 1 || MapBuilding.map[((y + 34) / 32)][((x + 64) / 32)] == 1
+                || ((y % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x + 64) / 32)] == 1)) {
             right = false;
         }
-        if(MapBuilding.map[((y) / 32)][((x - 5) / 32)] == 1 || MapBuilding.map[((y) / 32 + 1)][((x - 5) / 32)] == 1
-                || ((y % 32) > 5 && MapBuilding.map[((y) / 32 + 2)][((x - 4) / 32)] == 1)) {
+        if(MapBuilding.map[((y) / 32)][((x - 6) / 32)] == 1 || MapBuilding.map[((y + 34) / 32)][((x - 6) / 32)] == 1
+                || ((y % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x - 4) / 32)] == 1)) {
             left = false;
         }
-        if(MapBuilding.map[((y - 4) / 32)][(x / 32)] == 1 || MapBuilding.map[((y - 4) / 32)][(x / 32) + 1] == 1
-                || ((x % 32) > 5 && MapBuilding.map[((y - 4) / 32)][(x / 32) + 2] == 1)) {
+        if(MapBuilding.map[((y - 3) / 32)][(x / 32)] == 1 || MapBuilding.map[((y - 3) / 32)][(x / 32) + 1] == 1
+                || ((x % 32) > 5 && MapBuilding.map[((y - 3) / 32)][(x / 32) + 2] == 1)) {
             up = false;
             currentJumpSpeed = jumpSpeed;
             down = true;
         }
-        if(MapBuilding.map[((y + 66) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 66) / 32)][((x) / 32) + 1] == 1
-                || ((x % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x) / 32) + 2] == 1)) {
+        if(MapBuilding.map[((y + 64) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 64) / 32)][((x) / 32) + 1] == 1
+                || ((x % 32) > 5 && MapBuilding.map[((y + 64) / 32)][((x) / 32) + 2] == 1)) {
             down = false;
+            y -= (y % 32);
         }  else {
             if (!up) {
                 down = true;
             }
         }
 
+        if(up || down) {
+            if(dStillPressed && !(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 1 || MapBuilding.map[((y) / 32) + 1][((x + 64) / 32)] == 1
+                    || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 64) / 32)] == 1)))
+                right = true;
+            if(aStillPressed && !(MapBuilding.map[((y) / 32)][((x - 6) / 32)] == 1 || MapBuilding.map[((y) / 32 + 1)][((x - 6) / 32)] == 1
+                    || ((y % 32) > 5 && MapBuilding.map[((y) / 32 + 2)][((x - 4) / 32)] == 1)))
+                left = true;
+        }
 
         if(right){
             x += 6;
@@ -111,12 +124,13 @@ public class Player {
             if (left_animation > right_animation)
                 g.drawImage(GamePanel.images[9],  x, y , null);
             else
-                g.drawImage(GamePanel.images[9],  x, y , null);
+                g.drawImage(GamePanel.images[19],  x, y , null);
         }
 
 
         if (left) {
             right_animation = 0;
+            left_animation = 1;
             switch (lFramecounter) {
                 case 0, 2, 4, 6, 8 -> {
                     g.drawImage(GamePanel.images[10], x, y, null);
@@ -159,6 +173,7 @@ public class Player {
 
         if (right) {
             left_animation = 0;
+            right_animation = 1;
             switch (rFramecounter) {
                 case 0, 2, 4, 6, 8 -> {
                     g.drawImage(GamePanel.images[1], x, y, null);
@@ -214,20 +229,24 @@ public class Player {
         if (k == KeyEvent.VK_D) {
             right = true;
             left = false;
+            dStillPressed = true;
         }
         if (k == KeyEvent.VK_S)
             down = true;
         if (k == KeyEvent.VK_A){
             left = true;
-            right = false;}
+            right = false;
+            aStillPressed = true;}
         if (k == KeyEvent.VK_W && canJump)
             up = true;
     }
     public static void keyReleased(int k) {
-        if (k == KeyEvent.VK_D)
+        if (k == KeyEvent.VK_D){
             right = false;
-        if (k == KeyEvent.VK_A)
+            dStillPressed = false;}
+        if (k == KeyEvent.VK_A){
             left = false;
+            aStillPressed = false;}
 
     }
     }
