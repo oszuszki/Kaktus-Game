@@ -34,7 +34,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         setFocusable(true);
 
         //temporary
-        images = new BufferedImage[20];
+        images = new BufferedImage[22];
 
         try {
             images[0] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/redx.png"));
@@ -57,6 +57,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             images[17] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l8.png"));
             images[18] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/calib.png"));
             images[19] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/kaktus_r.png"));
+            images[20] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/arrow_l.png"));
+            images[21] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/arrow_r.png"));
         } catch (IOException var2) {
             var2.printStackTrace();
         }

@@ -40,7 +40,10 @@ public class Player {
             lvlCounter += 1;
             newLvl = true;
         }
-
+        if(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 3 || MapBuilding.map[((y + 34) / 32)][((x + 64) / 32)] == 3
+        || MapBuilding.map[((y) / 32)][((x - 6) / 32)] == 3 || MapBuilding.map[((y + 34) / 32)][((x - 6) / 32)] == 3) {
+            newLvl = true;
+        }
     }
 
     public static void move() {
@@ -49,8 +52,9 @@ public class Player {
 
         if(MapBuilding.map[((y + 66) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 66) / 32)][((x) / 32) + 1] == 1
                 || ((x % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x) / 32) + 2] == 1)
-        || MapBuilding.map[((y + 130) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 130) / 32)][((x) / 32) + 1] == 1)
+        || MapBuilding.map[((y + 130) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 130) / 32)][((x) / 32) + 1] == 1) {
             canJump = true;
+        }
         if(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 1 || MapBuilding.map[((y + 34) / 32)][((x + 64) / 32)] == 1
                 || ((y % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x + 64) / 32)] == 1)) {
             right = false;
@@ -69,7 +73,8 @@ public class Player {
                 || ((x % 32) > 5 && MapBuilding.map[((y + 64) / 32)][((x) / 32) + 2] == 1)) {
             down = false;
             y -= (y % 32);
-        }  else {
+        }
+        else {
             if (!up) {
                 down = true;
             }
@@ -170,8 +175,7 @@ public class Player {
                 }
             }
         }
-
-        if (right) {
+        else if (right) {
             left_animation = 0;
             right_animation = 1;
             switch (rFramecounter) {
