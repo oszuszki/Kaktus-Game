@@ -21,6 +21,7 @@ public class Map {
                         g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
                         break;*/
                     case 1:
+                    case 5:
                         g.setColor(Color.red);
                         g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
                         break;

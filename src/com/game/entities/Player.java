@@ -3,11 +3,10 @@ package com.game.entities;
 import com.game.appearance.MapBuilding;
 import com.game.panels.GamePanel;
 
-import static com.game.appearance.MapBuilding.y;
-import static com.game.appearance.MapBuilding.x;
-
 import java.awt.*;
 import java.awt.event.KeyEvent;
+
+import static com.game.appearance.MapBuilding.*;
 
 
 public class Player {
@@ -51,6 +50,18 @@ public class Player {
                 || MapBuilding.map[((y + 60) / 32)][((x) / 32)] == 4 || MapBuilding.map[((y + 60) / 32)][((x + 30) / 32)] == 4) {
             newLvl = true;
         }
+
+        if(MapBuilding.map[((y + 64) / 32)][((x) / 32)] == 5 || MapBuilding.map[((y + 64) / 32)][((x) / 32) + 1] == 5
+                || ((x % 32) > 5 && MapBuilding.map[((y + 64) / 32)][((x) / 32) + 2] == 5)) {
+            down = false;
+            y -= (y % 32);
+            if ((movingPlatformTime1 + 50) < System.currentTimeMillis() && 14 == platformRange ){
+                x += 1.5;
+            }
+            else if ((movingPlatformTime1 + 50) < System.currentTimeMillis() && 6 == platformRange )
+                x -= 1;
+        }
+
     }
 
     public static void move() {
@@ -59,7 +70,10 @@ public class Player {
 
         if(MapBuilding.map[((y + 66) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 66) / 32)][((x) / 32) + 1] == 1
                 || ((x % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x) / 32) + 2] == 1)
-        || MapBuilding.map[((y + 130) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 130) / 32)][((x) / 32) + 1] == 1) {
+                || MapBuilding.map[((y + 130) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 130) / 32)][((x) / 32) + 1] == 1
+                || MapBuilding.map[((y + 66) / 32)][((x) / 32)] == 5 || MapBuilding.map[((y + 66) / 32)][((x) / 32) + 1] == 5
+                || ((x % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x) / 32) + 2] == 5)
+                || MapBuilding.map[((y + 130) / 32)][((x) / 32)] == 5 || MapBuilding.map[((y + 130) / 32)][((x) / 32) + 1] == 5) {
             canJump = true;
         }
         if(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 1 || MapBuilding.map[((y + 34) / 32)][((x + 64) / 32)] == 1
