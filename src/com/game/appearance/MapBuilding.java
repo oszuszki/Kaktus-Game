@@ -96,7 +96,7 @@ public class MapBuilding {
                     y = 320;
                     movingPlatformX1 = 5;
                     movingPlatformY1 = 21;
-                    platformRange = 14;
+                    platformRange = 20;
                     newLvl = false;
                 }
                 for(int i=0; i<map.length; i++){
@@ -108,12 +108,12 @@ public class MapBuilding {
                                 map[i][j - 1] = 5;
                                 map[i][j - 2] = 5;
                                 map[i][j - 3] = 5;
-                                if ((movingPlatformTime1 + 500) < System.currentTimeMillis()) {
+                                if ((movingPlatformTime1 + 150) < System.currentTimeMillis()) {
                                     if (movingPlatformX1 < platformRange){
                                         movingPlatformX1 += 1;
                                         movingPlatformTime1 = System.currentTimeMillis();
                                     }
-                                    else if (14 == platformRange){
+                                    else if (20 == platformRange){
                                         platformRange = 6;
                                         movingPlatformX1 += 1;
                                         movingPlatformTime1 = System.currentTimeMillis();
@@ -123,7 +123,7 @@ public class MapBuilding {
                                         movingPlatformTime1 = System.currentTimeMillis();
                                     }
                                     else if (6 == platformRange){
-                                        platformRange = 14;
+                                        platformRange = 20;
                                         movingPlatformX1 -= 1;
                                         movingPlatformTime1 = System.currentTimeMillis();
                                     } } } }

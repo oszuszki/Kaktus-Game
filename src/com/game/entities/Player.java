@@ -55,11 +55,11 @@ public class Player {
                 || ((x % 32) > 5 && MapBuilding.map[((y + 64) / 32)][((x) / 32) + 2] == 5)) {
             down = false;
             y -= (y % 32);
-            if ((movingPlatformTime1 + 50) < System.currentTimeMillis() && 14 == platformRange ){
-                x += 1.5;
+            /**if ((movingPlatformTime1 + 150) < System.currentTimeMillis() && 14 == platformRange ){
+                x += 32;
             }
-            else if ((movingPlatformTime1 + 50) < System.currentTimeMillis() && 6 == platformRange )
-                x -= 1;
+            else if ((movingPlatformTime1 + 150) < System.currentTimeMillis() && 6 == platformRange )
+                x -= 32;*/
         }
 
     }
@@ -85,7 +85,9 @@ public class Player {
             left = false;
         }
         if(MapBuilding.map[((y - 3) / 32)][(x / 32)] == 1 || MapBuilding.map[((y - 3) / 32)][(x / 32) + 1] == 1
-                || ((x % 32) > 5 && MapBuilding.map[((y - 3) / 32)][(x / 32) + 2] == 1)) {
+                || ((x % 32) > 5 && MapBuilding.map[((y - 3) / 32)][(x / 32) + 2] == 1)
+            || MapBuilding.map[((y - 3) / 32)][(x / 32)] == 5 || MapBuilding.map[((y - 3) / 32)][(x / 32) + 1] == 5
+                || ((x % 32) > 5 && MapBuilding.map[((y - 3) / 32)][(x / 32) + 2] == 5)) {
             up = false;
             currentJumpSpeed = jumpSpeed;
             down = true;
