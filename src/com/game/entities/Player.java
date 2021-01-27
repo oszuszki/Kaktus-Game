@@ -65,12 +65,12 @@ public class Player {
                 || MapBuilding.map[((y + 130) / 32)][((x) / 32)] == 5 || MapBuilding.map[((y + 130) / 32)][((x) / 32) + 1] == 5) {
             canJump = true;
         }
-        if(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 1 || MapBuilding.map[((y + 34) / 32)][((x + 64) / 32)] == 1
-                || ((y % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x + 64) / 32)] == 1)) {
+        if(MapBuilding.map[((y) / 32)][((x + 68) / 32)] == 1 || MapBuilding.map[((y + 34) / 32)][((x + 68) / 32)] == 1
+                || ((y % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x + 68) / 32)] == 1)) {
             right = false;
         }
         if(MapBuilding.map[((y) / 32)][((x - 6) / 32)] == 1 || MapBuilding.map[((y + 34) / 32)][((x - 6) / 32)] == 1
-                || ((y % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x - 4) / 32)] == 1)) {
+                || ((y % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x - 6) / 32)] == 1)) {
             left = false;
         }
         if(MapBuilding.map[((y - 3) / 32)][(x / 32)] == 1 || MapBuilding.map[((y - 3) / 32)][(x / 32) + 1] == 1
