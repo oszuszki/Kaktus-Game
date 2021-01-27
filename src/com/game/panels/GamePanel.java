@@ -34,32 +34,26 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         setFocusable(true);
 
         //temporary
-        images = new BufferedImage[23];
+        images = new BufferedImage[17];
 
         try {
             images[0] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/redx.png"));
-            images[1] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/r1.png"));
-            images[2] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/r2.png"));
-            images[3] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/r3.png"));
-            images[4] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/r4.png"));
-            images[5] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/r5.png"));
-            images[6] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/r6.png"));
-            images[7] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/r7.png"));
-            images[8] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/r8.png"));
-            images[9] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/kaktus_l.png"));
-            images[10] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l1.png"));
-            images[11] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l2.png"));
-            images[12] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l3.png"));
-            images[13] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l4.png"));
-            images[14] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l5.png"));
-            images[15] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l6.png"));
-            images[16] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l7.png"));
-            images[17] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/l8.png"));
-            images[18] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/calib.png"));
-            images[19] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/kaktus_r.png"));
-            images[20] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/arrow_l.png"));
-            images[21] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/arrow_r.png"));
-            images[22] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/spike_up.png"));
+            images[1] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/runr1.png"));
+            images[2] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/runr2.png"));
+            images[3] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/runr3.png"));
+            images[4] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/runr4.png"));
+            images[5] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/runl1.png"));
+            images[6] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/runl2.png"));
+            images[7] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/runl3.png"));
+            images[8] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/runl4.png"));
+            images[9] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/mel.png"));
+            images[10] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/calib.png"));
+            images[11] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/mer.png"));
+            images[12] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/arrow_l.png"));
+            images[13] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/arrow_r.png"));
+            images[14] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/spike_up.png"));
+            images[15] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/upr.png"));
+            images[16] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/upl.png"));
         } catch (IOException var2) {
             var2.printStackTrace();
         }
