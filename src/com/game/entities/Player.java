@@ -3,10 +3,14 @@ package com.game.entities;
 import com.game.appearance.MapBuilding;
 import com.game.panels.GamePanel;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import static com.game.appearance.MapBuilding.*;
+import static com.game.entities.Collisions.*;
 
 
 public class Player {
@@ -25,6 +29,9 @@ public class Player {
     private static final double maxFallSpeed = 8;
     private static double currentFallSpeed = .3;
 
+    private static final int CHARACTERSIZE = 32;
+    private static final int CHARACTERMOVINGSPEED = 6;
+
     public static int lvlCounter = 1;
     public static boolean newLvl = true;
 
@@ -33,82 +40,30 @@ public class Player {
     private static int lFramecounter;
     private static int rFramecounter;
 
-    public static void specialCollision() {
-        if(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 2 || MapBuilding.map[((y) / 32) + 1][((x + 64) / 32)] == 2
-                || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 64) / 32)] == 2)) {
-            lvlCounter += 1;
-            newLvl = true;
-        }
-        if(MapBuilding.map[((y) / 32)][((x + 60) / 32)] == 3 || MapBuilding.map[((y + 30) / 32)][((x + 60) / 32)] == 3
-                || MapBuilding.map[((y) / 32)][((x) / 32)] == 3 || MapBuilding.map[((y + 30) / 32)][((x) / 32)] == 3
-                || MapBuilding.map[((y + 60) / 32)][((x) / 32)] == 3 || MapBuilding.map[((y + 60) / 32)][((x + 30) / 32)] == 3
-                ||MapBuilding.map[((y) / 32)][((x + 60) / 32)] == 33 || MapBuilding.map[((y + 30) / 32)][((x + 60) / 32)] == 33
-                || MapBuilding.map[((y) / 32)][((x - 1) / 32)] == 33 || MapBuilding.map[((y + 30) / 32)][((x - 1) / 32)] == 33
-                || MapBuilding.map[((y + 60) / 32)][((x) / 32)] == 33 || MapBuilding.map[((y + 60) / 32)][((x + 30) / 32)] == 33
-                || MapBuilding.map[((y) / 32)][((x + 60) / 32)] == 4 || MapBuilding.map[((y + 30) / 32)][((x + 60) / 32)] == 4
-                || MapBuilding.map[((y) / 32)][((x - 1) / 32)] == 4 || MapBuilding.map[((y + 30) / 32)][((x - 1) / 32)] == 4
-                || MapBuilding.map[((y + 60) / 32)][((x) / 32)] == 4 || MapBuilding.map[((y + 60) / 32)][((x + 30) / 32)] == 4) {
-            newLvl = true;
-        }
-
-    }
-
-    public static void move() {
-
-        specialCollision();
-
-        if(MapBuilding.map[((y + 66) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 66) / 32)][((x) / 32) + 1] == 1
-                || ((x % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x) / 32) + 2] == 1)
-                || MapBuilding.map[((y + 130) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 130) / 32)][((x) / 32) + 1] == 1
-                || MapBuilding.map[((y + 66) / 32)][((x) / 32)] == 5 || MapBuilding.map[((y + 66) / 32)][((x) / 32) + 1] == 5
-                || ((x % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x) / 32) + 2] == 5)
-                || MapBuilding.map[((y + 130) / 32)][((x) / 32)] == 5 || MapBuilding.map[((y + 130) / 32)][((x) / 32) + 1] == 5) {
-            canJump = true;
-        }
-        if(MapBuilding.map[((y) / 32)][((x + 68) / 32)] == 1 || MapBuilding.map[((y + 34) / 32)][((x + 68) / 32)] == 1
-                || ((y % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x + 68) / 32)] == 1)) {
-            right = false;
-        }
-        if(MapBuilding.map[((y) / 32)][((x - 6) / 32)] == 1 || MapBuilding.map[((y + 34) / 32)][((x - 6) / 32)] == 1
-                || ((y % 32) > 5 && MapBuilding.map[((y + 66) / 32)][((x - 6) / 32)] == 1)) {
-            left = false;
-        }
-        if(MapBuilding.map[((y - 3) / 32)][(x / 32)] == 1 || MapBuilding.map[((y - 3) / 32)][(x / 32) + 1] == 1
-                || ((x % 32) > 5 && MapBuilding.map[((y - 3) / 32)][(x / 32) + 2] == 1)
-            || MapBuilding.map[((y - 3) / 32)][(x / 32)] == 5 || MapBuilding.map[((y - 3) / 32)][(x / 32) + 1] == 5
-                || ((x % 32) > 5 && MapBuilding.map[((y - 3) / 32)][(x / 32) + 2] == 5)) {
-            up = false;
-            currentJumpSpeed = jumpSpeed;
-            down = true;
-        }
-        if(MapBuilding.map[((y + 64) / 32)][((x) / 32)] == 1 || MapBuilding.map[((y + 64) / 32)][((x) / 32) + 1] == 1
-                || ((x % 32) > 5 && MapBuilding.map[((y + 64) / 32)][((x) / 32) + 2] == 1)
-                || MapBuilding.map[((y + 64) / 32)][((x) / 32)] == 5 || MapBuilding.map[((y + 64) / 32)][((x) / 32) + 1] == 5
-                || ((x % 32) > 5 && MapBuilding.map[((y + 64) / 32)][((x) / 32) + 2] == 5)) {
-            down = false;
-            y -= (y % 32);
-        }
-        else {
-            if (!up) {
-                down = true;
-            }
-        }
+    public static void playerActions() {
+        goToTheNextLevel();
+        collisionWithTrapBlock();
+        canJump();
+        rightBlockIsSolid();
+        leftBlockIsSolid();
+        upperBlockIsSolid();
+        downBlockIsAir();
 
         if(up || down) {
-            if(dStillPressed && !(MapBuilding.map[((y) / 32)][((x + 64) / 32)] == 1 || MapBuilding.map[((y) / 32) + 1][((x + 64) / 32)] == 1
-                    || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 64) / 32)] == 1)))
+            if(dStillPressed && !(MapBuilding.map[((y) / 32)][((x + 32) / 32)] == 1
+                    || ((y % 32) > 5 && MapBuilding.map[((y) / 32) + 2][((x + 32) / 32)] == 1)))
                 right = true;
-            if(aStillPressed && !(MapBuilding.map[((y) / 32)][((x - 6) / 32)] == 1 || MapBuilding.map[((y) / 32 + 1)][((x - 6) / 32)] == 1
+            if(aStillPressed && !(MapBuilding.map[((y) / 32)][((x - 6) / 32)] == 1
                     || ((y % 32) > 5 && MapBuilding.map[((y) / 32 + 2)][((x - 4) / 32)] == 1)))
                 left = true;
         }
 
         if(right){
-            x += 6;
+            x += CHARACTERMOVINGSPEED;
         }
 
         if(left){
-            x -= 6;
+            x -= CHARACTERMOVINGSPEED;
         }
 
         if (up && !down) {
@@ -134,12 +89,48 @@ public class Player {
 
     }
 
+    public static void setRight(boolean right) {
+        Player.right = right;
+    }
+
+    public static void setLeft(boolean left) {
+        Player.left = left;
+    }
+
+    public static boolean isUp() {
+        return up;
+    }
+
+    public static void setUp(boolean up) {
+        Player.up = up;
+    }
+
+    public static void setDown(boolean down) {
+        Player.down = down;
+    }
+
+    public static void setCanJump(boolean canJump) {
+        Player.canJump = canJump;
+    }
+
+    public static double getJumpSpeed() {
+        return jumpSpeed;
+    }
+
+    public static void setCurrentJumpSpeed(double currentJumpSpeed) {
+        Player.currentJumpSpeed = currentJumpSpeed;
+    }
+
+    public static int getCHARACTERSIZE() {
+        return CHARACTERSIZE;
+    }
+
     public static void animation (Graphics g) {
 
         g.setColor(Color.blue);
-        g.drawRect(x,y ,64, 64);
+        g.drawRect(x,y ,32, 32);
 
-        if(up || down) {
+ /*       if(up || down) {
             if(left)
                 g.drawImage(GamePanel.images[16],  x, y , null);
             if(right)
@@ -204,16 +195,17 @@ public class Player {
                     g.drawImage(GamePanel.images[3], x, y, null);
                     rFramecounter = rFramecounter + 2;
                 }
-                case 26, 28, 30-> {
+                case 26, 28, 30, 32-> {
                     g.drawImage(GamePanel.images[4], x, y, null);
                     rFramecounter = rFramecounter + 2;
                 }
-                case 32 -> {
+                case 34-> {
                     g.drawImage(GamePanel.images[4], x, y, null);
                     rFramecounter = 0;
                 }
+
             }
-        }
+        }*/
     }
 
     public static void draw(Graphics g) {

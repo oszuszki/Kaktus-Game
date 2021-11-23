@@ -14,6 +14,8 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
+import static com.game.appearance.MapBuilding.x;
+import static com.game.appearance.MapBuilding.y;
 
 
 public class GamePanel extends JPanel implements Runnable, KeyListener {
@@ -34,7 +36,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         setFocusable(true);
 
         //temporary
-        images = new BufferedImage[17];
+        images = new BufferedImage[18];
 
         try {
             images[0] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/redx.png"));
@@ -54,12 +56,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
             images[14] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/spike_up.png"));
             images[15] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/upr.png"));
             images[16] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/upl.png"));
+            images[17] = ImageIO.read(this.getClass().getResourceAsStream("/res/images/demo_ground.png"));
         } catch (IOException var2) {
             var2.printStackTrace();
         }
 
         start();
     }
+
 
     public void start() {
         running = true;
@@ -71,11 +75,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
     public void update() {
         repaint();
-
-        Player.move();
-
-
-
+        Player.playerActions();
     }
 
     @Override
@@ -93,6 +93,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
 
             if (sleep > 0) {
                 try {
+                    //noinspection BusyWait
                     Thread.sleep(sleep);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -109,10 +110,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
     public void paint(Graphics g) {
         super.paintComponent(g);
 
-
+        setBackground(Color.black);
         Map.draw(g);
         Player.draw(g);
-        setBackground(Color.black);
     }
 
     @Override

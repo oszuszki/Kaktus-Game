@@ -8,9 +8,9 @@ import static com.game.appearance.MapBuilding.*;
 
 public class Map {
 
-    public static int blockSize= 32;
+    private static final int blockSize= 32;
 
-    public static void platform(Graphics g) {
+    private static void platform(Graphics g) {
         nextLvl();
 
         for (int i = 0; i < map.length; i++) {
@@ -21,9 +21,10 @@ public class Map {
                         g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
                         break;*/
                     case 1:
-                    case 5:
+                    case 155:
                         g.setColor(Color.red);
                         g.drawRect(j * blockSize,i * blockSize , blockSize, blockSize);
+                        //g.drawImage(GamePanel.images[17], j * blockSize,i * blockSize, blockSize, blockSize, null);
                         break;
                     case 2:
                         g.drawImage(GamePanel.images[10], j * blockSize,i * blockSize, blockSize, blockSize, null);
@@ -41,10 +42,6 @@ public class Map {
             }
         }
     }
-
-    /**public static void backGround(Graphics g){
-        g.drawImage(GamePanel.images[1], bg_x,bg_y, 2000, 1000, null);
-    }*/
 
     public static void draw(Graphics g) {
         //backGround(g);
